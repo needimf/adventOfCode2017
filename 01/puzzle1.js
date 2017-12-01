@@ -1,7 +1,7 @@
-const fs = require('fs')
+const fs = require('fs');
 let sum = 0;
 
-fs.readFile('./puzzle1.txt', 'utf-8', (err, captcha) => {
+fs.readFile('./day1.txt', 'utf-8', (err, captcha) => {
   for (var i = 0; i < captcha.length; i++) {
     if (captcha[i] === captcha[i + 1]) {
       sum += parseInt(captcha[i], 10);
