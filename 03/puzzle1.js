@@ -1,0 +1,1 @@
+const puzzleInput = 312051
