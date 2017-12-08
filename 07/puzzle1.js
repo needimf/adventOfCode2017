@@ -22,5 +22,5 @@ fs.readFile('./day7.txt', 'utf-8', (err, data) => {
     index++
   }
   
-  console.log(bottomProgramName)
+  return bottomProgramName
 })
