@@ -1,11 +1,38 @@
 let puzzleInput = 'jzgqcdpd'
-let used = 0
+let currentRegionCount = 0
+
+let gridLayout = new Array(128).fill(null)
 
 for (let i = 0; i < 128; i++) {
   let rowHashInput = `${puzzleInput}-${i}`
   let rowKnotHash = knotHash(rowHashInput)
-  let rowDigits = convertHexadecimalHashToBinary(rowKnotHash)
-  used += (rowDigits.match(/1/g)||[]).length
+  let rowDigits = convertHexadecimalHashToBinary(rowKnotHash).split('').map(digit => parseInt(digit, 10))
+  gridLayout[i] = rowDigits
+}
+
+for (let row = 0; row < gridLayout.length; row++) {
+  for (let col = 0; col < gridLayout[row].length; col++) {
+    if (gridLayout[row][col] === 1) {
+      currentRegionCount += 1
+      findRegionComponents(row, col)
+    }
+  }
+}
+
+console.log(currentRegionCount)
+
+
+function findRegionComponents(row, col) {
+  gridLayout[row][col] = null
+  for (let r = (row - 1); r < (row + 2); r++) {
+    for (let c = (col - 1); c < (col + 2); c++) {
+      if (((r === (row - 1) && c === col) || (r === (row + 1) && c === col) || (c === (col - 1) && r === row) || (c === (col + 1) && r === row)) && r >= 0 && r < 128) {
+        if (gridLayout[r][c] && gridLayout[r][c] === 1) {
+          findRegionComponents(r, c)
+        }
+      }
+    }
+  }
 }
 
 function knotHash(input) {
@@ -70,5 +97,3 @@ function convertHexadecimalHashToBinary(input) {
   })
   return binary
 }
-
-console.log(used)
