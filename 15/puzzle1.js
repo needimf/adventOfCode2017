@@ -9,7 +9,7 @@ let judgeCount = 0
 
 for (let i = 1; i <= 40000000; i++) {
   let [valueA, valueB] = createNextValues()
-  if (valueA.toString(2).substr(-16) === valueB.toString(2).substr(-16)) {
+  if ((valueA & 0xFFFF) === (valueB & 0xFFFF)) {
     judgeCount += 1
   }
 }
