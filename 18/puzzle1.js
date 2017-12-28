@@ -17,8 +17,6 @@ fs.readFile('./day18.txt', 'utf-8', (err, data) => {
 
   while (!recoverExecuted) {
     handleInstruction(instructions[index])
-    console.log(registers)
-    console.log(index)
   }
 
   console.log(recoveredSound)
@@ -29,7 +27,6 @@ fs.readFile('./day18.txt', 'utf-8', (err, data) => {
     }
     let x = isNaN(parseInt(instruction.x, 10)) ? instruction.x : parseInt(instruction.x, 10)
     let y = isNaN(parseInt(instruction.y, 10)) ? registers[instruction.y] : parseInt(instruction.y, 10)
-    console.log(x +' '+ y)
 
     switch (instruction.command) {
       case 'snd':
